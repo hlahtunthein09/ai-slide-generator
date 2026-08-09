@@ -37,3 +37,26 @@ test('does not mistake beginner-friendly for a casual tone', () => {
     assert.equal(intent.audience, 'beginner');
     assert.equal(intent.tone, 'neutral');
 });
+
+test('extracts slide count from prompts with multiple adjectives', () => {
+    const intent = parseUserIntent('Create 8 detailed, professional slides about cybersecurity');
+    assert.equal(intent.slideCount, 8);
+});
+
+test('extracts topics from numbered lists', () => {
+    const intent = parseUserIntent('Create 6 slides about cybersecurity covering these topics in order: 1. What is cybersecurity, 2. Common threats, 3. Password security. Make it beginner-friendly.');
+    assert.deepEqual(intent.topics, [
+        'What is cybersecurity',
+        'Common threats',
+        'Password security'
+    ]);
+});
+
+test('handles short prompts without extracting topics', () => {
+    const intent = parseUserIntent('create presentation slides for ai agents');
+    assert.equal(intent.slideCount, 6);
+    assert.deepEqual(intent.topics, []);
+    assert.equal(intent.audience, 'general');
+    assert.equal(intent.tone, 'neutral');
+    assert.equal(intent.style, 'standard');
+});

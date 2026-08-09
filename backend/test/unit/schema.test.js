@@ -26,3 +26,28 @@ test('keeps content density within the fixed renderer limits', () => {
     const result = validateSchema(presentation, getSchemaForIntent({ slideCount: 6, style: 'detailed' }));
     assert.equal(result.success, false);
 });
+
+test('accepts slides with a valid takeaway', () => {
+    const presentation = createPresentation(6);
+    presentation.slides[0].takeaway = 'This is a clear, concise key takeaway.';
+
+    const result = validateSchema(presentation, getSchemaForIntent({ slideCount: 6, style: 'standard' }));
+    assert.equal(result.success, true);
+});
+
+test('accepts slides without a takeaway', () => {
+    const presentation = createPresentation(6);
+    presentation.slides.forEach(slide => delete slide.takeaway);
+
+    const result = validateSchema(presentation, getSchemaForIntent({ slideCount: 6, style: 'standard' }));
+    assert.equal(result.success, true);
+});
+
+test('rejects takeaways longer than 180 characters', () => {
+    const presentation = createPresentation(6);
+    presentation.slides[0].takeaway = 'A'.repeat(181);
+
+    const result = validateSchema(presentation, getSchemaForIntent({ slideCount: 6, style: 'standard' }));
+    assert.equal(result.success, false);
+    assert.match(result.errors[0].field, /takeaway/);
+});

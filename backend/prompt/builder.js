@@ -82,11 +82,11 @@ Response: {
   "title": "Renewable Energy",
   "subtitle": "A professional overview of clean power sources",
   "slides": [
-    {"type": "content", "title": "What Is Renewable Energy?", "points": ["Energy from naturally replenished sources", "Produces lower emissions than fossil fuels", "Supports long-term energy security"]},
-    {"type": "content", "title": "Solar and Wind Power", "points": ["Solar panels convert sunlight into electricity", "Wind turbines capture moving air", "Both technologies are widely deployed"]}
+    {"type": "content", "title": "What Is Renewable Energy?", "points": ["Energy from naturally replenished sources", "Produces lower emissions than fossil fuels", "Supports long-term energy security"], "takeaway": "Renewable energy provides cleaner, sustainable power."},
+    {"type": "content", "title": "Solar and Wind Power", "points": ["Solar panels convert sunlight into electricity", "Wind turbines capture moving air", "Both technologies are widely deployed"], "takeaway": "Solar and wind are the most scalable renewable sources."}
   ]
 }
-Use the exact shape above, but generate the requested number of slides and cover every requested topic.`;
+Use the exact shape above, but generate the requested number of slides and cover every requested topic. Each slide should include a short takeaway that captures its single most important message.`;
 }
 
 /**

@@ -43,10 +43,12 @@ STRUCTURE RULES
 - Each slide must have the specified number of bullet points (default: 3-5).
 - Each bullet point must be concise and clear.
 - The final slide should summarize the key takeaways.
+- Each slide must include a short takeaway that captures the single most important message of that slide.
 
 VISUAL SAFETY RULES
 - Keep slide titles short (under 60 characters).
 - Keep bullet points short enough for a presentation (under 140 characters each).
+- Keep the takeaway under 180 characters.
 - Avoid long paragraphs or walls of text.
 - Bullet points should be scannable at a glance.
 
@@ -65,7 +67,8 @@ SCHEMA
     {
       "type": "content",
       "title": "string - Slide title (1-60 characters)",
-      "points": ["string - Bullet point (1-140 characters)", "..."]
+      "points": ["string - Bullet point (1-140 characters)", "..."],
+      "takeaway": "string - Single key takeaway (1-180 characters)"
     }
   ]
 }
