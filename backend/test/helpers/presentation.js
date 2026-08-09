@@ -6,7 +6,8 @@ function createPresentation(slideCount = 6, overrides = {}) {
             `First key point for slide ${index + 1}`,
             `Second key point for slide ${index + 1}`,
             `Third key point for slide ${index + 1}`
-        ]
+        ],
+        takeaway: `Key takeaway for slide ${index + 1}`
     }));
 
     return {

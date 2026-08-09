@@ -186,7 +186,8 @@ const App = {
                         'This presentation covers key aspects of ' + topic,
                         'Understanding the fundamentals is essential',
                         'Let us explore the main concepts together'
-                    ]
+                    ],
+                    takeaway: 'A solid introduction sets the foundation for understanding ' + topic + '.'
                 },
                 {
                     type: 'content',
@@ -195,7 +196,8 @@ const App = {
                         'Core principles and definitions',
                         'Important terminology to know',
                         'How these concepts relate to each other'
-                    ]
+                    ],
+                    takeaway: 'Mastering the core concepts makes the rest of ' + topic + ' easier to follow.'
                 },
                 {
                     type: 'content',
@@ -204,7 +206,8 @@ const App = {
                         'Real-world use cases',
                         'Industry applications',
                         'Practical implementation examples'
-                    ]
+                    ],
+                    takeaway: topic + ' has practical value across many real-world situations.'
                 },
                 {
                     type: 'content',
@@ -213,7 +216,8 @@ const App = {
                         'Key takeaways from this presentation',
                         'Important points to remember',
                         'Next steps for further learning'
-                    ]
+                    ],
+                    takeaway: 'Reviewing the summary helps lock in the most important lessons about ' + topic + '.'
                 }
             ]
         };
@@ -234,8 +238,9 @@ const App = {
         // Render the presentation
         PresentationRenderer.renderPresentation(presentation);
 
-        // Initialize navigation with the number of slides
-        Navigation.init(presentation.slides.length);
+        // Initialize navigation with the number of rendered slides
+        // (includes cover slide, content slides, and thank-you slide)
+        Navigation.init(document.querySelectorAll('#slide-container .slide').length);
 
         // Display the model used
         App.displayModel(model);

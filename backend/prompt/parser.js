@@ -35,8 +35,9 @@ function parseUserIntent(prompt) {
     // 1. Extract slide count
     // ============================================
     // Patterns: "10 slides", "10-slide", "10 detailed slides", "10 slide presentation"
+    // Also handles multiple adjectives: "10 detailed, professional slides"
     const countPatterns = [
-        /(\d+)\s+(?:\w+\s+)?slides?\b/i,  // "10 slides" or "10 detailed slides"
+        /(\d+)\s+(?:\w+[\s,]+)*slides?\b/i,  // "10 slides", "10 detailed slides", "10 detailed, professional slides"
         /(\d+)\s*-\s*slide/i,               // "10-slide"
         /(\d+)\s+slide\s+presentation/i,    // "10 slide presentation"
         /presentation\s+(?:with|of|having)\s+(\d+)/i  // "presentation with 10"
@@ -56,9 +57,10 @@ function parseUserIntent(prompt) {
     // 2. Extract specific topics
     // ============================================
     // Patterns: "covering X, Y, Z", "about X, Y, and Z", "including X"
-    // Also handles colons: "covering: X, Y, Z"
+    // Also handles numbered lists: "covering: 1. Topic A, 2. Topic B"
+    // Stops before trailing instructions like "Make it professional."
     const topicPatterns = [
-        /(?:covering|including)\s*:?\s+([\s\S]+?)(?:\.|$)/i,
+        /(?:covering|including)\s*:?\s+([\s\S]+?)(?=\.\s+(?:Make|Please|Ensure|It\s+should|Can\s+you|Should|Would|Use\s|Keep\s|Try\s|Let\s|Give|Provide|Add|Include)|\.?$)/i,
         /(?:about)\s+(.+?)(?:\s+(?:with|for|that|which|,)|\.|$)/i
     ];
 
@@ -66,11 +68,7 @@ function parseUserIntent(prompt) {
         const match = prompt.match(pattern);
         if (match) {
             const topicText = match[1].trim();
-            // Split by commas, "and", or semicolons
-            const topics = topicText
-                .split(/,|(?:\s+and\s+)|;/)
-                .map(t => t.trim().replace(/^[.:]+|[.:]+$/g, ''))  // Remove leading/trailing colons
-                .filter(t => t.length > 0 && t.length < 100);
+            const topics = splitTopics(topicText);
 
             if (topics.length > 0) {
                 intent.topics = topics;
@@ -183,6 +181,27 @@ function parseUserIntent(prompt) {
     }
 
     return intent;
+}
+
+/**
+ * Splits a topic string into individual topics.
+ * Handles comma-separated lists, "and" separators, and numbered lists.
+ * @param {string} topicText - The raw topic text extracted from the prompt
+ * @returns {string[]} - Array of clean topic strings
+ */
+function splitTopics(topicText) {
+    // Remove common prefixes like "these topics in order:", "the following topics:", etc.
+    const cleaned = topicText
+        .replace(/^(?:these|the following|following|these following)\s+topics?\s*(?:in order)?\s*:?\s*/i, '')
+        .replace(/^topics?:\s*/i, '');
+
+    // Split by numbered markers (1. 2. or 1) 2)), commas, semicolons, or "and"
+    const separators = /(?:\d+[.)]\s*)|(?:\s+and\s+)|[,;]/;
+
+    return cleaned
+        .split(separators)
+        .map(t => t.trim().replace(/^[.:\)\s]+|[.:\s]+$/g, ''))
+        .filter(t => t.length > 0 && t.length < 100);
 }
 
 module.exports = {

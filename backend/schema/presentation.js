@@ -38,7 +38,8 @@ function createPresentationSchema(options = {}) {
         points: z
             .array(z.string().min(1).max(maxPointLength))
             .min(minPoints)
-            .max(maxPoints)
+            .max(maxPoints),
+        takeaway: z.string().min(1).max(180).optional()
     }).strict();
 
     // Schema for complete presentation

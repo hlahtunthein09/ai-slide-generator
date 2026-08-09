@@ -25,6 +25,7 @@ const Navigation = {
         Navigation.currentSlide = 0;
         Navigation.updateCounter();
         Navigation.updateButtons();
+        Navigation.showCurrentSlide();
     },
 
     /**
