@@ -12,7 +12,11 @@
 const App = {
 
     // Backend API URL
-    API_URL: 'http://localhost:3001/api/generate',
+    // Uses localhost during development and a relative path in production.
+    // Vercel rewrites /api/* to the Render backend.
+    API_URL: (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+        ? 'http://localhost:3001/api/generate'
+        : '/api/generate',
 
     // Store last prompt for retry
     lastPrompt: '',
