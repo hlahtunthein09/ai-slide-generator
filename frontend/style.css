@@ -1,0 +1,571 @@
+/* ============================================
+   AI Presentation Generator - Main Stylesheet
+   ============================================ */
+
+/* CSS Reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Design Tokens (CSS Variables) */
+:root {
+    /* Colors */
+    --color-background: #f5f5f5;
+    --color-surface: #ffffff;
+    --color-primary: #2563eb;
+    --color-primary-hover: #1d4ed8;
+    --color-text: #111111;
+    --color-text-muted: #666666;
+    --color-border: #e5e5e5;
+    --color-error: #dc2626;
+    --color-error-bg: #fef2f2;
+
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-size-base: 16px;
+    --font-size-lg: 18px;
+    --font-size-xl: 24px;
+    --font-size-2xl: 32px;
+
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* App Container */
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+}
+
+/* Header */
+.app-header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+}
+
+.app-header h1 {
+    font-size: var(--font-size-2xl);
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.app-header .subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-muted);
+}
+
+/* Input Section */
+.input-section {
+    background: var(--color-surface);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: var(--spacing-xl);
+}
+
+.input-section label {
+    display: block;
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    margin-bottom: var(--spacing-sm);
+}
+
+.input-section textarea {
+    width: 100%;
+    min-height: 96px;
+    max-height: 280px;
+    padding: var(--spacing-md);
+    font-size: var(--font-size-base);
+    font-family: inherit;
+    line-height: 1.5;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-md);
+    transition: border-color 0.2s;
+    resize: vertical;
+    overflow-y: auto;
+}
+
+.input-section textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.prompt-hint {
+    margin: calc(var(--spacing-sm) * -1) 0 var(--spacing-md);
+    color: var(--color-text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.input-section button {
+    width: 100%;
+    padding: var(--spacing-md) var(--spacing-lg);
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: white;
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.input-section button:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.input-section button:disabled {
+    background-color: var(--color-text-muted);
+    cursor: not-allowed;
+}
+
+/* Loading Section */
+.loading-section {
+    text-align: center;
+    padding: var(--spacing-xl);
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid var(--color-border);
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto var(--spacing-md);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error Section */
+.error-section {
+    background: var(--color-error-bg);
+    border: 1px solid var(--color-error);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+}
+
+.error-icon {
+    font-size: 32px;
+    margin-bottom: var(--spacing-sm);
+}
+
+.error-section p {
+    color: var(--color-error);
+    font-weight: 500;
+    margin-bottom: var(--spacing-md);
+}
+
+.error-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+}
+
+.retry-btn,
+.simplify-btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.retry-btn {
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+}
+
+.retry-btn:hover {
+    background-color: var(--color-primary-hover);
+}
+
+.simplify-btn {
+    background-color: transparent;
+    color: var(--color-text-muted);
+    border: 1px solid var(--color-border);
+}
+
+.simplify-btn:hover {
+    background-color: var(--color-surface);
+    border-color: var(--color-text-muted);
+}
+
+/* Preview Section */
+.preview-section {
+    background: var(--color-surface);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    position: relative;
+}
+
+.pdf-download-btn {
+    position: relative;
+    padding: var(--spacing-sm) var(--spacing-md);
+    color: white;
+    background: var(--color-primary);
+    border: 0;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+}
+
+.pdf-download-btn:hover {
+    background: var(--color-primary-hover);
+}
+
+.pdf-tooltip {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 220px;
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-sm);
+    font-weight: 400;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+    z-index: 10;
+    pointer-events: none;
+    text-align: left;
+}
+
+.pdf-download-btn:hover .pdf-tooltip,
+.pdf-download-btn:focus .pdf-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.presentation-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: var(--spacing-lg);
+}
+
+.presentation-title {
+    text-align: center;
+    margin-bottom: var(--spacing-md);
+}
+
+.presentation-title h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xs);
+}
+
+.presentation-title p {
+    color: var(--color-text-muted);
+}
+
+.model-display {
+    text-align: center;
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-top: var(--spacing-xs);
+    margin-bottom: 0;
+}
+
+.model-display.hidden {
+    display: none;
+}
+
+/* Slide Container */
+.slide-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Navigation */
+.navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.nav-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-base);
+    font-weight: 500;
+    color: var(--color-text);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover:not(:disabled) {
+    background: var(--color-background);
+    border-color: var(--color-text-muted);
+}
+
+.nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.slide-counter {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    color: var(--color-text-muted);
+    min-width: 80px;
+    text-align: center;
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+/* ============================================
+   Slide Template Styles
+   ============================================ */
+
+/* Slide Design Tokens */
+:root {
+    /* Slide Dimensions (16:9 aspect ratio) */
+    --slide-width: 960px;
+    --slide-height: 540px;
+    --slide-padding: 60px;
+
+    /* Slide Typography */
+    --slide-title-size: 36px;
+    --slide-point-size: 22px;
+    --slide-point-line-height: 1.5;
+
+    /* Slide Colors */
+    --slide-background: #ffffff;
+    --slide-foreground: #1a1a1a;
+    --slide-muted: #666666;
+    --slide-accent: #2563eb;
+    --slide-border: #e5e5e5;
+
+    /* Slide Spacing */
+    --slide-point-gap: 16px;
+    --slide-header-gap: 32px;
+}
+
+/* Slide Container */
+.slide-container {
+    width: 100%;
+    max-width: var(--slide-width);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Individual Slide */
+.slide {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: var(--slide-background);
+    border: 1px solid var(--slide-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: var(--slide-padding);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Slide Header */
+.slide-header {
+    margin-bottom: var(--slide-header-gap);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 3px solid var(--slide-accent);
+}
+
+/* Slide Title */
+.slide-title {
+    font-size: var(--slide-title-size);
+    font-weight: 700;
+    color: var(--slide-foreground);
+    line-height: 1.2;
+    margin: 0;
+}
+
+/* Slide Content Area */
+.slide-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+/* Bullet Points List */
+.slide-points {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Individual Bullet Point */
+.slide-point {
+    font-size: var(--slide-point-size);
+    color: var(--slide-foreground);
+    line-height: var(--slide-point-line-height);
+    padding: var(--slide-point-gap) 0;
+    padding-left: 28px;
+    position: relative;
+}
+
+/* Bullet Point Marker */
+.slide-point::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--slide-accent);
+    font-weight: bold;
+    font-size: 24px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+    :root {
+        --slide-width: 100%;
+        --slide-padding: 40px;
+        --slide-title-size: 28px;
+        --slide-point-size: 18px;
+    }
+}
+
+@media (max-width: 640px) {
+    :root {
+        --slide-padding: 24px;
+        --slide-title-size: 24px;
+        --slide-point-size: 16px;
+        --slide-point-gap: 12px;
+        --slide-header-gap: 24px;
+    }
+
+    .slide {
+        border-radius: var(--radius-md);
+    }
+
+    .pdf-download-btn {
+        width: 100%;
+    }
+
+    .presentation-toolbar {
+        justify-content: stretch;
+    }
+
+    .pdf-tooltip {
+        left: 0;
+        right: auto;
+        width: 100%;
+    }
+}
+
+/* PDF export: the browser print dialog saves each generated slide as a page. */
+@page {
+    size: 13.333in 7.5in;
+    margin: 0;
+}
+
+@media print {
+    html,
+    body {
+        width: 13.333in;
+        height: 7.5in;
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+
+    .app-header,
+    .input-section,
+    .loading-section,
+    .error-section,
+    .presentation-title,
+    .presentation-toolbar,
+    .pdf-tooltip,
+    .model-display,
+    .navigation {
+        display: none !important;
+    }
+
+    .app-main,
+    .preview-section {
+        display: block !important;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        background: transparent;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .slide-container {
+        display: block;
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .slide-container .slide,
+    .slide-container .slide.hidden {
+        display: flex !important;
+        width: 13.333in;
+        height: 7.5in;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        break-after: page;
+        page-break-after: always;
+        box-sizing: border-box;
+    }
+
+    .slide-container .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+}

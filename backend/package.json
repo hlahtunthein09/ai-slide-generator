@@ -1,0 +1,20 @@
+{
+  "name": "ai-slide-generator-backend",
+  "version": "1.0.0",
+  "description": "Backend API for AI Presentation Generator",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node --test --experimental-test-isolation=none test/unit/schema.test.js test/unit/intent.test.js test/unit/retry.test.js test/integration/generator.test.js",
+    "test:live": "set RUN_LIVE_AI_TESTS=true&& node --test --experimental-test-isolation=none test/live/openrouter.test.js"
+  },
+  "dependencies": {
+    "@openrouter/ai-sdk-provider": "^3.0.0",
+    "ai": "^7.0.58",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "zod": "^3.22.4"
+  }
+}

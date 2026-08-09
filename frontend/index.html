@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Presentation Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Header -->
+        <header class="app-header">
+            <h1>AI Presentation Generator</h1>
+            <p class="subtitle">Transform your ideas into stunning presentations with the power of AI</p>
+        </header>
+
+        <main class="app-main">
+            <!-- Input Section -->
+            <section id="input-section" class="input-section">
+                <label for="prompt-input">Enter your presentation topic:</label>
+                <textarea
+                    id="prompt-input"
+                    rows="3"
+                    placeholder='Create presentation slides about "AI Agents"'
+                    aria-describedby="prompt-hint"
+                ></textarea>
+                <p id="prompt-hint" class="prompt-hint">Press Ctrl + Enter to generate.</p>
+                <button id="generate-btn">Generate Presentation</button>
+            </section>
+
+            <!-- Loading State -->
+            <section id="loading-section" class="loading-section hidden">
+                <div class="spinner"></div>
+                <p>Generating your presentation...</p>
+            </section>
+
+            <!-- Error Display -->
+            <section id="error-section" class="error-section hidden">
+                <div class="error-icon">⚠️</div>
+                <p id="error-message"></p>
+                <div class="error-actions">
+                    <button id="retry-btn" class="retry-btn">Try Again</button>
+                    <button id="simplify-btn" class="simplify-btn">Generate Simple Version</button>
+                </div>
+            </section>
+
+            <!-- Slide Preview Section -->
+            <section id="preview-section" class="preview-section hidden">
+                <div class="presentation-title">
+                    <h2 id="presentation-title"></h2>
+                    <p id="presentation-subtitle"></p>
+                    <p id="model-display" class="model-display hidden"></p>
+                </div>
+
+                <div class="presentation-toolbar">
+                    <button id="download-pdf-btn" class="pdf-download-btn" type="button">
+                        Download PDF
+                        <span class="pdf-tooltip">Use Landscape orientation in the print dialog for best results.</span>
+                    </button>
+                </div>
+
+                <div id="slide-container" class="slide-container">
+                    <!-- Slides will be rendered here -->
+                </div>
+
+                <!-- Navigation Controls -->
+                <div id="navigation" class="navigation">
+                    <button id="prev-btn" class="nav-btn">← Previous</button>
+                    <span id="slide-counter" class="slide-counter">0 / 0</span>
+                    <button id="next-btn" class="nav-btn">Next →</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/renderer.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
