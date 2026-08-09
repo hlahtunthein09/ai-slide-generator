@@ -4,15 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Presentation Generator</title>
+    <link rel="icon" type="image/svg+xml" href="icons/outline/device-laptop.svg">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="app">
         <!-- Header -->
         <header class="app-header">
-            <h1>AI Presentation Generator</h1>
-            <p class="subtitle">Transform your ideas into stunning presentations with the power of AI</p>
+            <div class="brand">
+                <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 19l18 0" />
+                    <path d="M5 7a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" />
+                </svg>
+                <span class="brand-name">AI Presentation Generator</span>
+            </div>
+            <p class="subtitle">Transform your ideas into stunning presentations with AI</p>
         </header>
+
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <p class="hero-tagline">AI-powered presentations</p>
+            <h2 class="hero-title">Turn a simple prompt into a structured slide deck</h2>
+            <p class="hero-subtitle">"Describe your idea once. Get a complete deck in seconds."</p>
+        </section>
 
         <main class="app-main">
             <!-- Input Section -->
@@ -70,7 +84,55 @@
                     <button id="next-btn" class="nav-btn">Next →</button>
                 </div>
             </section>
+
+            <!-- Features Section -->
+            <section class="features-section">
+                <h2 class="features-title">What it can do</h2>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <img src="icons/outline/ai.svg" alt="" class="feature-icon" width="40" height="40">
+                        <h3>AI-generated content</h3>
+                        <p>Turns your topic into a structured outline, talking points, and key takeaways automatically.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <img src="icons/outline/check.svg" alt="" class="feature-icon" width="40" height="40">
+                        <h3>Clean slide design</h3>
+                        <p>Every slide follows a consistent 16:9 layout with typography, icons, and a footer.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <img src="icons/outline/chart-bar.svg" alt="" class="feature-icon" width="40" height="40">
+                        <h3>Export to PDF</h3>
+                        <p>Use your browser's print dialog to save the deck as a landscape PDF.</p>
+                    </article>
+
+                    <article class="feature-card">
+                        <img src="icons/outline/bulb.svg" alt="" class="feature-icon" width="40" height="40">
+                        <h3>Simple to use</h3>
+                        <p>No frameworks or accounts — just type your topic, generate, preview, and download.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Mission Section -->
+            <section class="mission-section">
+                <p class="mission-text">
+                    A small, controlled presentation-generation engine that turns a simple natural-language prompt
+                    into a structured, usable slide deck, even when using low-cost or free AI models.
+                </p>
+            </section>
         </main>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p class="footer-brand">AI Presentation Generator</p>
+            <p class="footer-credits">Built by Group 5 as a learning project to explore how AI can simplify creative work and help anyone communicate ideas faster.</p>
+            <p class="footer-icons">
+                Icons by <a href="https://tabler-icons.io" target="_blank" rel="noopener">Tabler Icons</a>, MIT licensed.
+            </p>
+            <p class="footer-copy">© 2026 Group-5. All rights reserved.</p>
+        </footer>
     </div>
 
     <!-- Scripts -->

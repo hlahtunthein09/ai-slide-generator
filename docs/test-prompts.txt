@@ -1,0 +1,14 @@
+Create 8 professional slides about "The Future of Remote Work" covering:
+1. Introduction to remote work
+2. Benefits for employees
+3. Benefits for employers
+4. Communication and collaboration tools
+5. Time zone and cultural challenges
+6. Work-life balance tips
+7. Cybersecurity best practices
+8. Conclusion and future outlook
+
+Audience: university students.
+Tone: professional but approachable.
+Style: detailed with 3-4 bullet points per slide.
+Include a short key takeaway at the bottom of each content slide.

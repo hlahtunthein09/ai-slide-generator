@@ -305,6 +305,7 @@ const App = {
         }
         if (generateBtn) {
             generateBtn.disabled = true;
+            generateBtn.textContent = 'Generating...';
         }
     },
 
@@ -320,6 +321,7 @@ const App = {
         }
         if (generateBtn) {
             generateBtn.disabled = false;
+            generateBtn.textContent = 'Generate Presentation';
         }
     },
 
