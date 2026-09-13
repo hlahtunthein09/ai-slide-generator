@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Presentation Generator</title>
+    <title>SlideCraft</title>
     <link rel="icon" type="image/svg+xml" href="icons/outline/device-laptop.svg">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -12,33 +12,46 @@
         <!-- Header -->
         <header class="app-header">
             <div class="brand">
-                <svg class="brand-logo" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                    <path d="M3 19l18 0" />
-                    <path d="M5 7a1 1 0 0 1 1 -1h12a1 1 0 0 1 1 1v8a1 1 0 0 1 -1 1h-12a1 1 0 0 1 -1 -1l0 -8" />
-                </svg>
-                <span class="brand-name">AI Presentation Generator</span>
+                <img src="icons/hugeicons/presentation-01.svg" alt="" class="brand-logo" width="32" height="32" aria-hidden="true">
+                <span class="brand-name">SlideCraft</span>
             </div>
-            <p class="subtitle">Transform your ideas into stunning presentations with AI</p>
+            <div class="member-marquee" aria-label="Group 5 members: Hla Htun Thein, Yan Naing, Min Khant, Phyo Myat Mon, La Min Eain, and Min Thet Cho">
+                <div class="member-track" aria-hidden="true">
+                    <span class="member-name">Hla Htun Thein</span>
+                    <span class="member-name">Yan Naing</span>
+                    <span class="member-name">Min Khant</span>
+                    <span class="member-name">Phyo Myat Mon</span>
+                    <span class="member-name">La Min Eain</span>
+                    <span class="member-name">Min Thet Cho</span>
+                    <span class="member-name">Hla Htun Thein</span>
+                    <span class="member-name">Yan Naing</span>
+                    <span class="member-name">Min Khant</span>
+                    <span class="member-name">Phyo Myat Mon</span>
+                    <span class="member-name">La Min Eain</span>
+                    <span class="member-name">Min Thet Cho</span>
+                </div>
+            </div>
+            <p class="project-label">group-5 project : AI slide generator</p>
         </header>
 
         <!-- Hero Section -->
         <section class="hero-section">
-            <p class="hero-tagline">AI-powered presentations</p>
-            <h2 class="hero-title">Turn a simple prompt into a structured slide deck</h2>
-            <p class="hero-subtitle">"Describe your idea once. Get a complete deck in seconds."</p>
+            <p class="hero-tagline">From idea to presentation</p>
+            <h2 class="hero-title">Give your topic a clear point of view.</h2>
+            <p class="hero-subtitle">Describe what you need to explain. Review a ready-to-present deck in one place.</p>
         </section>
 
         <main class="app-main">
             <!-- Input Section -->
             <section id="input-section" class="input-section">
-                <label for="prompt-input">Enter your presentation topic:</label>
+                <label for="prompt-input">What should this presentation explain?</label>
                 <textarea
                     id="prompt-input"
                     rows="3"
-                    placeholder='Create presentation slides about "AI Agents"'
+                    placeholder='For example: Create 8 professional slides about AI agents for university students.'
                     aria-describedby="prompt-hint"
                 ></textarea>
-                <p id="prompt-hint" class="prompt-hint">Press Ctrl + Enter to generate.</p>
+                <p id="prompt-hint" class="prompt-hint">Be as specific as you like. Press Ctrl + Enter to generate.</p>
                 <button id="generate-btn">Generate Presentation</button>
             </section>
 
@@ -90,25 +103,25 @@
                 <h2 class="features-title">What it can do</h2>
                 <div class="features-grid">
                     <article class="feature-card">
-                        <img src="icons/outline/ai.svg" alt="" class="feature-icon" width="40" height="40">
+                        <img src="icons/hugeicons/ai-brain-01.svg" alt="" class="feature-icon" width="40" height="40">
                         <h3>AI-generated content</h3>
                         <p>Turns your topic into a structured outline, talking points, and key takeaways automatically.</p>
                     </article>
 
                     <article class="feature-card">
-                        <img src="icons/outline/check.svg" alt="" class="feature-icon" width="40" height="40">
+                        <img src="icons/hugeicons/presentation-01.svg" alt="" class="feature-icon" width="40" height="40">
                         <h3>Clean slide design</h3>
                         <p>Every slide follows a consistent 16:9 layout with typography, icons, and a footer.</p>
                     </article>
 
                     <article class="feature-card">
-                        <img src="icons/outline/chart-bar.svg" alt="" class="feature-icon" width="40" height="40">
+                        <img src="icons/hugeicons/pdf-01.svg" alt="" class="feature-icon" width="40" height="40">
                         <h3>Export to PDF</h3>
                         <p>Use your browser's print dialog to save the deck as a landscape PDF.</p>
                     </article>
 
                     <article class="feature-card">
-                        <img src="icons/outline/bulb.svg" alt="" class="feature-icon" width="40" height="40">
+                        <img src="icons/hugeicons/workflow-square-01.svg" alt="" class="feature-icon" width="40" height="40">
                         <h3>Simple to use</h3>
                         <p>No frameworks or accounts — just type your topic, generate, preview, and download.</p>
                     </article>
@@ -126,7 +139,7 @@
 
         <!-- Footer -->
         <footer class="app-footer">
-            <p class="footer-brand">AI Presentation Generator</p>
+            <p class="footer-brand">SlideCraft</p>
             <p class="footer-credits">Built by Group 5 as a learning project to explore how AI can simplify creative work and help anyone communicate ideas faster.</p>
             <p class="footer-icons">
                 Icons by <a href="https://tabler-icons.io" target="_blank" rel="noopener">Tabler Icons</a>, MIT licensed.
