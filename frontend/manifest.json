@@ -1,0 +1,55 @@
+{
+  "name": "SlideCraft - AI Slide Generator",
+  "short_name": "SlideCraft",
+  "description": "AI presentation generator that turns natural language topics into ready-to-present decks.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "any",
+  "background_color": "#07131f",
+  "theme_color": "#07131f",
+  "lang": "en",
+  "dir": "ltr",
+  "categories": ["productivity", "utilities", "education"],
+  "icons": [
+    {
+      "src": "icons/pwa/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/pwa/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/pwa/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icons/pwa/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Create Presentation",
+      "short_name": "Create",
+      "description": "Generate a new slide presentation with AI",
+      "url": "./index.html#input-section",
+      "icons": [
+        {
+          "src": "icons/pwa/icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
