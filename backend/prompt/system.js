@@ -36,6 +36,7 @@ CONTENT RULES
 - Do not invent statistics, studies, quotations, or citations.
 - Do not add unrelated topics.
 - Each bullet point should be a complete thought, not a sentence fragment.
+- Format each point as "Label: concise explanation" whenever it can be done naturally. Keep the label to 2-5 words and the explanation to one short sentence.
 
 STRUCTURE RULES
 - Generate the number of slides specified (default: 6 slides).
@@ -49,7 +50,7 @@ VISUAL SAFETY RULES
 - Keep slide titles short (under 60 characters).
 - Keep bullet points short enough for a presentation (under 140 characters each).
 - Keep the takeaway under 180 characters.
-- Avoid long paragraphs or walls of text.
+- Do not write paragraphs or walls of text.
 - Bullet points should be scannable at a glance.
 
 OUTPUT RULES

@@ -41,7 +41,7 @@ const PresentationRenderer = {
         { icon: 'user-group.svg', titlePhrases: ['student clubs', 'student organizations'], titleTerms: ['clubs', 'organizations', 'societies'], bulletPhrases: ['student clubs', 'student organizations'] },
         { icon: 'home-01.svg', titlePhrases: ['campus housing', 'student housing'], titleTerms: ['housing', 'dormitory', 'dorm', 'accommodation'], bulletPhrases: ['campus housing', 'student housing'] },
         { icon: 'briefcase-01.svg', titlePhrases: ['career preparation', 'career development'], titleTerms: ['career', 'internship', 'internships', 'employment'], bulletPhrases: ['career preparation', 'career development'] },
-        { icon: 'library.svg', titlePhrases: ['campus library', 'university library'], titleTerms: ['library', 'libraries'], bulletPhrases: ['campus library', 'university library'] },
+        { icon: 'library.svg', priority: 80, titlePhrases: ['campus library', 'university library', 'library resources'], titleTerms: ['library', 'libraries'], bulletPhrases: ['campus library', 'university library'] },
 
         // Artificial intelligence and software
         { icon: 'ai-chip.svg', titlePhrases: ['machine learning'], titleTerms: ['neural'], bulletPhrases: ['machine learning', 'neural network'] },
@@ -62,7 +62,7 @@ const PresentationRenderer = {
         { icon: 'cloud-server.svg', titlePhrases: ['cloud computing', 'cloud infrastructure'], titleTerms: ['cloud', 'server'], bulletPhrases: ['cloud computing', 'cloud infrastructure'] },
         { icon: 'cpu.svg', titlePhrases: ['computer hardware'], titleTerms: ['hardware', 'cpu', 'processor'], bulletPhrases: ['computer hardware'] },
         { icon: 'settings-01.svg', titlePhrases: ['system configuration'], titleTerms: ['settings', 'configuration'], bulletPhrases: ['system configuration'] },
-        { icon: 'computer-activity.svg', titlePhrases: ['computer systems'], titleTerms: ['computer', 'laptop', 'device'], bulletPhrases: ['computer systems'] },
+        { icon: 'computer-activity.svg', priority: 70, titlePhrases: ['computer systems', 'technology labs', 'technology lab'], titleTerms: ['computer', 'laptop', 'device', 'technology', 'technical'], bulletPhrases: ['computer systems', 'technology labs'] },
 
         // People and communication
         { icon: 'user-group.svg', titlePhrases: ['team collaboration', 'user experience'], titleTerms: ['users', 'people', 'team'], bulletPhrases: ['team collaboration', 'user experience'] },
@@ -70,6 +70,7 @@ const PresentationRenderer = {
         { icon: 'message-01.svg', titlePhrases: ['business communication'], titleTerms: ['communication', 'message'], bulletPhrases: ['business communication'] },
         { icon: 'mail-01.svg', titlePhrases: ['email marketing'], titleTerms: ['email', 'mail'], bulletPhrases: ['email marketing'] },
         { icon: 'call-02.svg', titlePhrases: ['customer contact'], titleTerms: ['phone', 'contact'], bulletPhrases: ['customer contact'] },
+        { icon: 'calendar-01.svg', priority: 70, titlePhrases: ['student events', 'campus events'], titleTerms: ['event', 'events', 'schedule'], bulletPhrases: ['student events', 'campus events'] },
 
         // International, analysis, and project work
         { icon: 'global-education.svg', titlePhrases: ['global education'], titleTerms: [], bulletPhrases: ['global education'] },
@@ -108,6 +109,11 @@ const PresentationRenderer = {
         const subtitle = presentation.subtitle || '';
         const contentSlides = Array.isArray(presentation.slides) ? presentation.slides : [];
         const totalSlides = contentSlides.length + 2; // cover + content + closing
+        const layoutPlans = window.SlideLayoutPlanner
+            ? window.SlideLayoutPlanner.planContentLayouts(contentSlides)
+            : contentSlides.map(function() {
+                return { template: 'bullet-focus', confidence: 0, reasons: ['Layout planner unavailable.'] };
+            });
 
         container.innerHTML = '';
         PresentationRenderer.deckTitle = title;
@@ -117,7 +123,7 @@ const PresentationRenderer = {
         contentSlides.forEach(function(slide, index) {
             const slideNumber = index + 2; // The cover is slide 1.
             container.appendChild(
-                PresentationRenderer.renderContentSlide(slide, slideNumber, totalSlides)
+                PresentationRenderer.renderContentSlide(slide, slideNumber, totalSlides, layoutPlans[index])
             );
         });
 
@@ -180,17 +186,32 @@ const PresentationRenderer = {
      * @param {number} totalSlides - Total number of slides
      * @returns {HTMLElement} - The rendered slide element
      */
-    renderContentSlide: function(slide, slideNumber, totalSlides) {
-        const markup = PresentationRenderer.buildContentSlideMarkup(slide, slideNumber, totalSlides);
+    renderContentSlide: function(slide, slideNumber, totalSlides, plan) {
+        const markup = PresentationRenderer.buildContentSlideMarkup(slide, slideNumber, totalSlides, plan);
         return PresentationRenderer.createSlideElement('slide-content', slideNumber - 1, markup);
     },
 
     // Combines the three visible areas of a normal slide: header, body, and footer.
-    buildContentSlideMarkup: function(slide, slideNumber, totalSlides) {
+    buildContentSlideMarkup: function(slide, slideNumber, totalSlides, plan) {
         const title = slide.title || '';
         const points = Array.isArray(slide.points) ? slide.points : [];
         const takeaway = slide.takeaway || 'Key takeaway';
         const iconPath = PresentationRenderer.selectIconForSlide({ title: title, points: points });
+        const pointIcons = points.map(function(point) {
+            return PresentationRenderer.selectIconForSlide({ title: point, points: [] }, false);
+        });
+
+        if (window.SlideTemplates) {
+            return window.SlideTemplates.renderContentTemplate({
+                slide: { title: title, points: points, takeaway: takeaway },
+                plan: plan || { template: 'bullet-focus' },
+                icon: iconPath,
+                pointIcons: pointIcons,
+                presentationTitle: PresentationRenderer.deckTitle,
+                slideNumber: slideNumber,
+                totalSlides: totalSlides
+            });
+        }
 
         return [
             PresentationRenderer.buildSlideHeader(title),
@@ -260,7 +281,7 @@ const PresentationRenderer = {
      * @param {Object} slide - The slide data object
      * @returns {string|null} - The icon file name, or null when no topic is clear
      */
-    selectIconForSlide: function(slide) {
+    selectIconForSlide: function(slide, useFallback) {
         const title = typeof slide.title === 'string' ? slide.title : '';
         const points = Array.isArray(slide.points) ? slide.points.join(' ') : '';
         let bestMatch = null;
@@ -295,7 +316,7 @@ const PresentationRenderer = {
             }
         });
 
-        return bestMatch ? bestMatch.icon : 'presentation-01.svg';
+        return bestMatch ? bestMatch.icon : (useFallback === false ? null : 'presentation-01.svg');
     },
 
     /**

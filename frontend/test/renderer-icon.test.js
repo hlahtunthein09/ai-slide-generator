@@ -103,3 +103,20 @@ test('uses relevant icons for standard presentation sections', () => {
         );
     }
 });
+
+test('maps individual university content points to distinct Hugeicons', () => {
+    const cases = [
+        ['Library resources and study spaces', 'library.svg'],
+        ['Sports centres support wellbeing', 'football.svg'],
+        ['Technology labs provide practical tools', 'computer-activity.svg'],
+        ['Events build friendships across courses', 'calendar-01.svg']
+    ];
+
+    for (const [title, expectedIcon] of cases) {
+        assert.equal(
+            window.PresentationRenderer.selectIconForSlide({ title, points: [] }),
+            expectedIcon,
+            title
+        );
+    }
+});
