@@ -28,6 +28,13 @@
 - `→` or `↓` — Next slide
 - `←` or `↑` — Previous slide
 
+### Progressive Web App (PWA) & Installation
+SlideCraft is a fully installable PWA on Desktop and Mobile:
+- **Desktop (Chrome / Edge / Brave):** Click the **Install App** button in the header, or the install icon in the browser address bar.
+- **Android (Chrome):** Tap the **Install App** button or browser menu (`⋮`) -> **Install App / Add to Home screen**.
+- **iOS / iPadOS (Safari):** Tap **Install App** for a guided walk-through, or tap **Share** (`⎋`) -> **Add to Home Screen** (`⊞`).
+- **Offline Mode:** Core static assets are cached via Service Worker (`sw.js`). You can browse previously viewed or generated slides even without an internet connection.
+
 ### Testing (Browser Console)
 Open browser console (F12) and run:
 ```javascript
@@ -42,12 +49,21 @@ App.testGenerate()
 
 ```
 frontend/
-├── index.html      # Main HTML structure
-├── style.css       # All styles (design system + slides)
+├── index.html          # Main HTML structure + PWA meta tags
+├── manifest.json       # Web App Manifest (PWA metadata, icons, shortcuts)
+├── sw.js               # Service Worker (asset caching & offline support)
+├── style.css           # All styles (design system + slides + PWA UI)
+├── icons/
+│   ├── pwa/            # PWA icons (192px, 512px, maskable, apple-touch-icon, SVG)
+│   ├── hugeicons/      # Slide templates & feature icons
+│   └── outline/        # Favicon & UI icons
 └── js/
-    ├── app.js      # Main orchestration, API calls
-    ├── renderer.js # Converts JSON to HTML slides
-    └── navigation.js # Slide navigation controls
+    ├── app.js          # Main orchestration, API calls
+    ├── pwa.js          # PWA manager (install prompts, iOS modal, offline monitor)
+    ├── renderer.js     # Converts JSON to HTML slides
+    ├── navigation.js   # Slide navigation controls
+    ├── slide-layouts.js # 16:9 layout calculation
+    └── slide-templates.js # Structural visual templates
 ```
 
 ## For Team Members

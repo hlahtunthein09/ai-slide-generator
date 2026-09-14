@@ -60,6 +60,7 @@ The AI never controls layout, CSS, or HTML.
 | Layer | Technology |
 |-------|-----------|
 | Frontend | HTML, CSS, Vanilla JavaScript |
+| PWA | Web App Manifest, Service Worker, Install to Desktop & Mobile |
 | Backend | Node.js, Express |
 | Validation | Zod |
 | AI Provider | OpenRouter |
@@ -76,11 +77,15 @@ The frontend is intentionally vanilla so team members who know only HTML/CSS/JS 
 ```
 ai-slide-generator/
 │
-├── frontend/              # Team presents (HTML/CSS/JS only)
-│   ├── index.html
-│   ├── style.css
+├── frontend/              # Team presents (HTML/CSS/JS only + PWA)
+│   ├── index.html         # Main app markup & PWA install entry
+│   ├── manifest.json      # PWA Web App Manifest
+│   ├── sw.js              # Service Worker (offline cache & fast load)
+│   ├── style.css          # Design system & responsive layout
+│   ├── icons/             # App icons (PWA & slide templates)
 │   ├── js/
 │   │   ├── app.js         # Main orchestration, API calls
+│   │   ├── pwa.js         # PWA installer (desktop/mobile/iOS)
 │   │   ├── renderer.js    # JSON to HTML slides
 │   │   └── navigation.js  # Slide navigation
 │   └── README.md

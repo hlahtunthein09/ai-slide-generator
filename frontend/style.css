@@ -70,6 +70,35 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px sol
 .brand-logo { width: 32px; height: 32px; flex: 0 0 auto; filter: invert(80%) sepia(29%) saturate(936%) hue-rotate(127deg) brightness(93%) contrast(91%); }
 .brand-name { font: 600 26px/1 var(--font-display); letter-spacing: 0.025em; }
 .project-label { margin: 0; color: var(--text-muted); font-size: 12px; letter-spacing: 0.025em; text-align: right; white-space: nowrap; }
+.header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; }
+.pwa-install-btn { display: inline-flex; align-items: center; gap: 7px; padding: 6px 13px; font-size: 13px; font-weight: 600; color: var(--ink-950); background: var(--cyan); border: 1px solid var(--cyan-strong); border-radius: var(--radius-sm); box-shadow: 0 4px 14px rgba(88, 216, 209, 0.25); cursor: pointer; transition: transform 140ms var(--ease-out), background-color 160ms var(--ease-out), box-shadow 160ms var(--ease-out); }
+.pwa-install-btn:hover { background: var(--cyan-strong); box-shadow: 0 6px 18px rgba(88, 216, 209, 0.4); transform: translateY(-1px); }
+.pwa-install-btn:active { transform: scale(0.96); }
+.pwa-install-btn.hidden { display: none !important; }
+.install-icon { width: 15px; height: 15px; stroke: var(--ink-950); flex-shrink: 0; }
+.offline-banner { display: flex; align-items: center; gap: 10px; margin: 16px 0 0; padding: 10px 16px; background: rgba(220, 160, 40, 0.12); border: 1px solid rgba(240, 185, 75, 0.35); border-radius: var(--radius-sm); color: #f7d288; font-size: 13px; font-weight: 500; }
+.offline-banner.hidden { display: none !important; }
+.offline-icon { font-size: 16px; flex-shrink: 0; }
+.pwa-toast { position: fixed; bottom: 24px; right: 24px; z-index: 1000; max-width: 360px; padding: 12px 18px; background: var(--ink-800); border: 1px solid var(--line-strong); border-radius: var(--radius-md); color: var(--paper); font-size: 14px; box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4); opacity: 0; pointer-events: none; transform: translateY(12px); transition: opacity 220ms var(--ease-out), transform 220ms var(--ease-out); }
+.pwa-toast.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.ios-modal-overlay { position: fixed; inset: 0; z-index: 1100; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(4, 15, 25, 0.78); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.ios-modal-overlay.hidden { display: none !important; }
+.ios-modal-card { position: relative; width: 100%; max-width: 440px; padding: 26px; background: var(--ink-900); border: 1px solid var(--line-strong); border-radius: var(--radius-lg); box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5); animation: modal-pop 200ms var(--ease-out); }
+@keyframes modal-pop { from { opacity: 0; transform: scale(0.94); } to { opacity: 1; transform: scale(1); } }
+.ios-modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+.ios-modal-brand { display: flex; align-items: center; gap: 12px; }
+.ios-modal-app-icon { border-radius: 9px; border: 1px solid var(--line-strong); }
+.ios-modal-title { margin: 0; color: var(--paper); font: 600 20px/1.2 var(--font-display); letter-spacing: 0.01em; }
+.ios-modal-subtitle { margin: 3px 0 0; color: var(--text-muted); font-size: 13px; }
+.ios-modal-close { width: 32px; height: 32px; display: grid; place-items: center; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--line); border-radius: 50%; color: var(--text-muted); font-size: 20px; cursor: pointer; transition: background-color 150ms, color 150ms; }
+.ios-modal-close:hover { background: rgba(255, 255, 255, 0.12); color: var(--paper); }
+.ios-modal-steps { display: flex; flex-direction: column; gap: 14px; }
+.ios-step { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; background: rgba(17, 40, 58, 0.5); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.ios-step-number { display: grid; place-items: center; flex: 0 0 24px; width: 24px; height: 24px; background: var(--cyan); color: var(--ink-950); font-weight: 700; font-size: 13px; border-radius: 50%; }
+.ios-step-text { margin: 0; color: var(--text); font-size: 14px; line-height: 1.45; }
+.ios-step-text strong { color: var(--cyan); }
+.inline-icon { display: inline-block; vertical-align: -3px; margin: 0 3px; color: var(--cyan); }
+body.app-standalone .pwa-install-btn { display: none !important; }
 .member-marquee { position: relative; width: 100%; min-width: 0; overflow: hidden; justify-self: center; border-inline: 1px solid rgba(88, 216, 209, 0.2); mask-image: linear-gradient(to right, transparent, black 9%, black 91%, transparent); }
 .member-track { display: flex; width: max-content; animation: member-marquee 24s linear infinite; }
 .member-name { display: inline-flex; align-items: center; flex: 0 0 auto; gap: 15px; padding: 0 15px; color: #c6dbdd; font-size: 13px; font-weight: 600; line-height: 28px; white-space: nowrap; }
@@ -269,7 +298,8 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px sol
 }
 @media (max-width: 540px) {
     .app-header { grid-template-columns: 1fr; gap: 12px; }
-    .project-label { grid-row: 2; text-align: left; }
+    .header-actions { grid-row: 2; flex-direction: row; justify-content: space-between; align-items: center; width: 100%; flex-wrap: wrap; }
+    .project-label { text-align: left; }
     .member-marquee { grid-column: auto; grid-row: 3; }
     .hero-title { font-size: 52px; }
     .hero-subtitle { font-size: 16px; }
@@ -364,7 +394,7 @@ button:focus-visible, textarea:focus-visible, a:focus-visible { outline: 3px sol
 @media print {
     :root { --slide-padding: 80px; --slide-cover-title-size: 66px; --slide-cover-subtitle-size: 28px; --slide-title-size: 42px; --slide-point-size: 26px; --slide-point-gap: 22px; --slide-header-size: 17px; --slide-footer-size: 17px; --slide-number-size: 17px; }
     html, body { width: 13.333in; height: 7.5in; margin: 0; padding: 0; background: var(--slide-background) !important; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-    .app-header, .hero-section, .features-section, .mission-section, .app-footer, .input-section, .loading-section, .error-section, .presentation-title, .presentation-toolbar, .navigation { display: none !important; }
+    .app-header, .hero-section, .features-section, .mission-section, .app-footer, .input-section, .loading-section, .error-section, .presentation-title, .presentation-toolbar, .navigation, .offline-banner, .pwa-toast, .ios-modal-overlay { display: none !important; }
     #app, .app-main, .preview-section { display: block !important; width: 100%; margin: 0; padding: 0; background: transparent; border: 0; box-shadow: none; }
     .slide-container { display: block; width: 100%; max-width: none; margin: 0; padding: 0; }
     .slide-container .slide, .slide-container .slide.hidden { display: flex !important; width: 13.333in; height: 7.5in; margin: 0; border: 0; border-radius: 0; box-shadow: none; break-after: page; page-break-after: always; box-sizing: border-box; }
